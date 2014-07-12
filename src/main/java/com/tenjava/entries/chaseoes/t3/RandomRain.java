@@ -61,7 +61,9 @@ public class RandomRain extends JavaPlugin {
                     }
 
                     if (player != null) {
-                        cs.sendMessage(rainType.getName() + player.getDisplayName());
+                        cs.sendMessage(rainType.getName() + " " + player.getDisplayName());
+                        rainType.run(player);
+                        return true;
                     } else {
                         cs.sendMessage(PREFIX + ChatColor.RED + "That player isn't online.");
                     }
