@@ -1,3 +1,9 @@
 name: RandomRain
 main: com.tenjava.entries.chaseoes.t3.RandomRain
+author: chaseoes
 version: '${project.version}'
+commands:
+  randomrain:
+    description: The central command for the RandomRain plugin.
+    usage: /<command> [args]
+    aliases: [rr]

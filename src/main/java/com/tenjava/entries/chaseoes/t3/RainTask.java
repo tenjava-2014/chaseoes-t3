@@ -13,7 +13,7 @@ public class RainTask extends BukkitRunnable {
         Random r = new Random();
         float chance = r.nextFloat();
         if (chance <= 0.10f) {
-
+            System.out.println("IT SHOULD RAIN NOW");
         }
     }
 
