@@ -17,9 +17,11 @@ public enum RainType {
     CAT_AND_DOG("cats and dogs"), ANVIL("anvils"), POTION("deadly potions"), DIAMOND("diamonds"), RAINBOW("rainbows"), EXPERIENCE("experience"), CREEPER("creepers");
 
     private final String name;
+    private RainType rainType;
 
     RainType(String name) {
         this.name = name;
+        this.rainType = this;
     }
 
     public String getName() {
@@ -29,80 +31,79 @@ public enum RainType {
     public void run(final Player targetPlayer) {
         final Random r = new Random();
 
-        switch (this) {
-        case CAT_AND_DOG:
-            targetPlayer.sendMessage(RandomRain.PREFIX + "It's raining " + this.getName() + "...");
+        targetPlayer.sendMessage(RandomRain.PREFIX + "It's raining " + this.getName() + "...");
 
-            final BukkitTask task = RandomRain.getInstance().getServer().getScheduler().runTaskTimer(RandomRain.getInstance(), new Runnable() {
-                public void run() {
-                    float yaw = -180;
-                    while (yaw != 180) {
-                        List<Location> alreadyDone = new ArrayList<Location>();
-                        Location bl = new Location(targetPlayer.getWorld(), targetPlayer.getLocation().getX(), targetPlayer.getLocation().getY(), targetPlayer.getLocation().getZ(), yaw, targetPlayer.getLocation().getPitch());
-                        BlockIterator bi = new BlockIterator(bl, 15, 5);
-                        while (bi.hasNext()) {
-                            Block block = bi.next();
-                            Location blockLocation = block.getLocation();
-                            if (!alreadyDone.contains(blockLocation)) {
-                                EntityType type = EntityType.OCELOT;
-                                int randomTwo = r.nextInt(3);
-                                float chance = r.nextFloat();
-                                alreadyDone.add(blockLocation);
+        final BukkitTask task = RandomRain.getInstance().getServer().getScheduler().runTaskTimer(RandomRain.getInstance(), new Runnable() {
+            public void run() {
+                float yaw = -180;
+                while (yaw != 180) {
+                    List<Location> alreadyDone = new ArrayList<Location>();
+                    Location bl = new Location(targetPlayer.getWorld(), targetPlayer.getLocation().getX(), targetPlayer.getLocation().getY(), targetPlayer.getLocation().getZ(), yaw, targetPlayer.getLocation().getPitch());
+                    BlockIterator bi = new BlockIterator(bl, 15, 5);
+                    while (bi.hasNext()) {
+                        Block block = bi.next();
+                        Location blockLocation = block.getLocation();
+                        if (!alreadyDone.contains(blockLocation)) {
+                            EntityType type = EntityType.OCELOT;
+                            int randomTwo = r.nextInt(3);
+                            float chance = r.nextFloat();
+                            alreadyDone.add(blockLocation);
 
-                                if (randomTwo == 2) {
-                                    type = EntityType.WOLF;
-                                }
+                            if (randomTwo == 2) {
+                                type = EntityType.WOLF;
+                            }
 
-                                if (chance <= 0.01f) {
+                            if (chance <= 0.01f) {
+                                switch (rainType) {
+                                case CAT_AND_DOG:
                                     final Entity spawnedEntity = blockLocation.getWorld().spawnEntity(blockLocation, type);
                                     RandomRain.getInstance().getServer().getScheduler().runTaskLater(RandomRain.getInstance(), new Runnable() {
                                         public void run() {
                                             spawnedEntity.remove();
                                         }
                                     }, 60L);
+                                    break;
+                                case ANVIL:
+                                    System.out.println(this.toString());
+                                    break;
+
+                                case POTION:
+                                    System.out.println(this.toString());
+                                    break;
+
+                                case DIAMOND:
+                                    System.out.println(this.toString());
+                                    break;
+
+                                case RAINBOW:
+                                    System.out.println(this.toString());
+                                    break;
+
+                                case EXPERIENCE:
+                                    System.out.println(this.toString());
+                                    break;
+
+                                case CREEPER:
+                                    System.out.println(this.toString());
+                                    break;
+
+                                default:
+                                    break;
                                 }
                             }
                         }
-                        yaw++;
                     }
-
+                    yaw++;
                 }
-            }, 0L, 10L);
 
-            RandomRain.getInstance().getServer().getScheduler().runTaskLater(RandomRain.getInstance(), new Runnable() {
-                public void run() {
-                    task.cancel();
-                }
-            }, 100L);
+            }
+        }, 0L, 10L);
 
-            break;
-        case ANVIL:
-            System.out.println(this.toString());
-            break;
-
-        case POTION:
-            System.out.println(this.toString());
-            break;
-
-        case DIAMOND:
-            System.out.println(this.toString());
-            break;
-
-        case RAINBOW:
-            System.out.println(this.toString());
-            break;
-
-        case EXPERIENCE:
-            System.out.println(this.toString());
-            break;
-
-        case CREEPER:
-            System.out.println(this.toString());
-            break;
-
-        default:
-            break;
-        }
+        RandomRain.getInstance().getServer().getScheduler().runTaskLater(RandomRain.getInstance(), new Runnable() {
+            public void run() {
+                task.cancel();
+            }
+        }, 100L);
 
     }
 
