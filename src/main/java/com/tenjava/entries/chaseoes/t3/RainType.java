@@ -14,4 +14,14 @@ public enum RainType {
         return name;
     }
 
+    public static String getTypes() {
+        StringBuilder sb = new StringBuilder();
+        for (RainType type : RainType.values()) {
+            sb.append(type.toString().toLowerCase() + ", ");
+        }
+
+        String types = sb.toString();
+        return types.toString().substring(0, types.length() - 2);
+    }
+
 }
