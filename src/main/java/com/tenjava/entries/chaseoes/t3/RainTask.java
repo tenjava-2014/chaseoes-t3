@@ -31,7 +31,13 @@ public class RainTask extends BukkitRunnable {
      */
     private Player getRandomPlayer() {
         Random r = new Random();
-        int p = r.nextInt(RandomRain.getInstance().getServer().getOnlinePlayers().length) + 1; // Get a random number within the amount of online players.
+        int p = r.nextInt(RandomRain.getInstance().getServer().getOnlinePlayers().length); // Get a random number within the amount of online players.
+
+        // Return null of no players are online.
+        if (RandomRain.getInstance().getServer().getOnlinePlayers().length == 0) {
+            return null;
+        }
+
         Player player = Arrays.asList(RandomRain.getInstance().getServer().getOnlinePlayers()).get(p); // Use that number we just got to get that player from the online player list.
         return player;
     }
