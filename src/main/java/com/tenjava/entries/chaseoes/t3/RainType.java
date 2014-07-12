@@ -1,6 +1,16 @@
 package com.tenjava.entries.chaseoes.t3;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+import org.bukkit.Location;
+import org.bukkit.block.Block;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitTask;
+import org.bukkit.util.BlockIterator;
 
 public enum RainType {
 
@@ -16,12 +26,56 @@ public enum RainType {
         return name;
     }
 
-    public void run(Player targetPlayer) {
+    public void run(final Player targetPlayer) {
+        final Random r = new Random();
+
         switch (this) {
         case CAT_AND_DOG:
-            System.out.println(this.toString());
-            break;
+            targetPlayer.sendMessage(RandomRain.PREFIX + "It's raining " + this.getName() + "...");
 
+            final BukkitTask task = RandomRain.getInstance().getServer().getScheduler().runTaskTimer(RandomRain.getInstance(), new Runnable() {
+                public void run() {
+                    float yaw = -180;
+                    while (yaw != 180) {
+                        List<Location> alreadyDone = new ArrayList<Location>();
+                        Location bl = new Location(targetPlayer.getWorld(), targetPlayer.getLocation().getX(), targetPlayer.getLocation().getY(), targetPlayer.getLocation().getZ(), yaw, targetPlayer.getLocation().getPitch());
+                        BlockIterator bi = new BlockIterator(bl, 15, 5);
+                        while (bi.hasNext()) {
+                            Block block = bi.next();
+                            Location blockLocation = block.getLocation();
+                            if (!alreadyDone.contains(blockLocation)) {
+                                EntityType type = EntityType.OCELOT;
+                                int randomTwo = r.nextInt(3);
+                                float chance = r.nextFloat();
+                                alreadyDone.add(blockLocation);
+
+                                if (randomTwo == 2) {
+                                    type = EntityType.WOLF;
+                                }
+
+                                if (chance <= 0.01f) {
+                                    final Entity spawnedEntity = blockLocation.getWorld().spawnEntity(blockLocation, type);
+                                    RandomRain.getInstance().getServer().getScheduler().runTaskLater(RandomRain.getInstance(), new Runnable() {
+                                        public void run() {
+                                            spawnedEntity.remove();
+                                        }
+                                    }, 60L);
+                                }
+                            }
+                        }
+                        yaw++;
+                    }
+
+                }
+            }, 0L, 10L);
+
+            RandomRain.getInstance().getServer().getScheduler().runTaskLater(RandomRain.getInstance(), new Runnable() {
+                public void run() {
+                    task.cancel();
+                }
+            }, 100L);
+
+            break;
         case ANVIL:
             System.out.println(this.toString());
             break;
@@ -49,6 +103,7 @@ public enum RainType {
         default:
             break;
         }
+
     }
 
     public static String getTypes() {
