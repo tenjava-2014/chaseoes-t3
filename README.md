@@ -32,6 +32,11 @@ Usage
 
 Just install the plugin by dropping it in your plugins folder and it's ready to go! Just wait, and your players will need to change their pants after being scared by randomly being rained upon by creepers or anvils.
 
+YouTube Video
+-----------
+
+An example YouTube video is available here: [https://www.youtube.com/user/chaseoes/videos](https://www.youtube.com/user/chaseoes/videos)
+
 Commands & Permissions
 -----------
 
