@@ -1,6 +1,7 @@
 package com.tenjava.entries.chaseoes.t3;
 
 import org.bukkit.ChatColor;
+import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class RandomRain extends JavaPlugin {
@@ -17,7 +18,10 @@ public class RandomRain extends JavaPlugin {
         instance = this;
 
         getServer().getScheduler().runTaskTimer(this, new RainTask(), 0L, 6000L); // Run the rain task every 5 minutes.
-        getCommand(getDescription().getName().toLowerCase()).setExecutor(new RainCommandExecutor()); // Handle the "randomrain" command in the RainCommandExecutor class.
+
+        PluginCommand rainCommand = getCommand(getDescription().getName().toLowerCase());
+        rainCommand.setExecutor(new RainCommandExecutor()); // Handle the "randomrain" command in the RainCommandExecutor class.
+        rainCommand.setTabCompleter(new RainTabCompleter()); // Set the tab completer for the "randomrain" command.
     }
 
     public void onDisable() {
