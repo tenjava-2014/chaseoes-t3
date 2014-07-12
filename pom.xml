@@ -4,8 +4,8 @@
 	<groupId>com.tenjava.entries.chaseoes.t3</groupId>
 	<artifactId>RandomRain</artifactId>
 	<version>1.0</version>
-	<name>ten.java 2014 July</name>
-	<description>Isn't the default Minecraft rain a little boring? Let's make it rain a bit differently.</description>
+	<name>RandomRain</name>
+	<description>Isn't default Minecraft rain a little boring? Let's make it rain a bit differently.</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
