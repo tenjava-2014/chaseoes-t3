@@ -36,6 +36,9 @@ public class RandomRain extends JavaPlugin {
         }
 
         if (args[0].equalsIgnoreCase("help")) {
+            cs.sendMessage(PREFIX + "By default, " + getDescription().getName() + " will randomly make it \"rain\" upon players, with a random type of rain.");
+            cs.sendMessage(PREFIX + "To view the types of rain, use: " + ChatColor.RED + "/" + string + " types");
+            cs.sendMessage(PREFIX + "To manually make it rain: " + ChatColor.RED + "/" + string + " rain <rain type> [player]");
             return true;
         }
 
