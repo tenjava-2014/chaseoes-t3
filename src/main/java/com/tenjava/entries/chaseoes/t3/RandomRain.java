@@ -8,9 +8,9 @@ public class RandomRain extends JavaPlugin {
 
     private static RandomRain instance;
 
-    public static final String PREFIX = ChatColor.YELLOW + "[RandomRain] " + ChatColor.GRAY;
+    public static final String PREFIX = ChatColor.YELLOW + "[RandomRain] " + ChatColor.GRAY; // This is the basic formatting used to print messages to the player throughout the plugin.
 
-    public static RandomRain getInstance() {
+    public static RandomRain getInstance() { // Keep an instance of our main class for easy access from other classes.
         return instance;
     }
 

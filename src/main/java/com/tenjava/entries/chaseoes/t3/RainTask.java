@@ -14,24 +14,26 @@ public class RainTask extends BukkitRunnable {
     public void run() {
         Random r = new Random();
         float chance = r.nextFloat();
-        if (chance <= 0.30f) {
-            int randomType = r.nextInt(RainType.values().length) + 1;
+        if (chance <= 0.30f) { // We don't want someone to suffer *every* 5 minutes, so we give a 30% chance of actually raining on someone.
+            int randomType = r.nextInt(RainType.values().length) + 1; // Get a random number which will be used to get a random rainfall type.
             Player target = getRandomPlayer();
-            if (target != null) {
+            if (target != null) { // We want to make sure they're not null, which getRandomPlayer() returns if no players are online.
                 RainType type = Arrays.asList(RainType.values()).get(randomType);
-                type.run(target);
+                type.run(target); // Run the effect on the random player.
             }
         }
     }
 
+    /**
+     * Picks out a random player from all players currently online.
+     * 
+     * @return the Player object for a random online player or null if there is no players online
+     */
     private Player getRandomPlayer() {
         Random r = new Random();
-        int p = r.nextInt(RandomRain.getInstance().getServer().getOnlinePlayers().length) + 1;
-        Player player = Arrays.asList(RandomRain.getInstance().getServer().getOnlinePlayers()).get(p);
-        if (player != null) {
-            return player;
-        }
-        return null;
+        int p = r.nextInt(RandomRain.getInstance().getServer().getOnlinePlayers().length) + 1; // Get a random number within the amount of online players.
+        Player player = Arrays.asList(RandomRain.getInstance().getServer().getOnlinePlayers()).get(p); // Use that number we just got to get that player from the online player list.
+        return player;
     }
 
 }
