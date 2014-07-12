@@ -42,3 +42,5 @@ For testing purposes (or for your enjoyment of trolling) you can manually invoke
 | /rr                          | (none)               | General plugin information.                                                   |
 | /rr types                    | (none)               | List the names of the available rain types, for use in the rain command.      |
 | /rr rain <type> [player]     | randomrain.admin     | Manually invoke rainfall against yourself, or optionally, another player.     |
+
+You can optionally use the __/randomrain__ command instead of it's alias, __/rr__.
