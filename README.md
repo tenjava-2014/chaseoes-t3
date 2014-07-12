@@ -38,7 +38,7 @@ Commands & Permissions
 For testing purposes (or for your enjoyment of trolling) you can manually invoke the different types of rain by using a command.
 
 | __Command__                  | __Permission__       | __Description__                                                               |
-| ---------------------------- |:--------------------:| -----------------------------------------------------------------------------:|
+| ---------------------------- |:-------------------- | :-----------------------------------------------------------------------------|
 | /rr                          | (none)               | General plugin information.                                                   |
 | /rr types                    | (none)               | List the names of the available rain types, for use in the rain command.      |
 | /rr rain <type> [player]     | randomrain.admin     | Manually invoke rainfall against yourself, or optionally, another player.     |
